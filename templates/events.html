@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create Event</h2>
+<form method="POST">
+Title: <input name="title"><br>
+Description: <input name="description"><br>
+Start: <input type="datetime-local" name="start"><br>
+End: <input type="datetime-local" name="end"><br>
+Timezone: <input name="timezone"><br>
+<button>Create</button>
+</form>
+
+<h3>All Events</h3>
+{% for e in events %}
+<p>{{ e.title }} ({{ e.start_time }} - {{ e.end_time }})</p>
+{% endfor %}
+{% endblock %}

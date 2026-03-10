@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Event Scheduler Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f6f9;
+}
+
+.card{
+border-radius:15px;
+box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Event Scheduler</h2>
+
+<a href="/report" class="btn btn-success mb-3">
+View Utilisation Report
+</a>
+
+<div class="row">
+
+<!-- CREATE EVENT -->
+
+<div class="col-md-4">
+
+<div class="card p-4">
+
+<h4>Create Event</h4>
+
+<form action="/events" method="post">
+
+<div class="mb-3">
+<input type="text" name="title" class="form-control" placeholder="Title" required>
+</div>
+
+<div class="mb-3">
+<input type="text" name="description" class="form-control" placeholder="Description">
+</div>
+
+<div class="mb-3">
+<label>Start Time</label>
+<input type="datetime-local" name="start_time" class="form-control" required>
+</div>
+
+<div class="mb-3">
+<label>End Time</label>
+<input type="datetime-local" name="end_time" class="form-control" required>
+</div>
+
+<button class="btn btn-primary w-100">
+Create Event
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- EVENT LIST -->
+
+<div class="col-md-8">
+
+<div class="card p-4">
+
+<h4>Event List</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Start</th>
+<th>End</th>
+<th>Action</th>
+</tr>
+
+{% for e in events %}
+
+<tr>
+
+<td>{{e.id}}</td>
+<td>{{e.title}}</td>
+<td>{{e.start_time}}</td>
+<td>{{e.end_time}}</td>
+
+<td>
+
+<a href="/delete/{{e.id}}" class="btn btn-danger btn-sm">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+<hr>
+
+
+<!-- RESOURCE ALLOCATION -->
+
+<h4>Allocate Resource</h4>
+
+<form action="/allocate" method="post">
+
+<div class="mb-2">
+<input type="number" name="event_id" placeholder="Event ID" class="form-control" required>
+</div>
+
+<div class="mb-2">
+<input type="number" name="resource_id" placeholder="Resource ID" class="form-control" required>
+</div>
+
+<button class="btn btn-success">
+Allocate Resource
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
